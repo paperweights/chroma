@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/CameraRoom.gd" type="Script" id=1]
+[ext_resource path="res://TileSet.tres" type="TileSet" id=2]
+[ext_resource path="res://Sprites/Shaders/Default.shader" type="Shader" id=3]
+[ext_resource path="res://Scenes/Prefabs/Rotator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Prefabs/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Prefabs/Gravitator.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/mod_colour = Color( 0, 1, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 3 )
+shader_param/mod_colour = Color( 0, 0.501961, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/mod_colour = Color( 0, 0.752941, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/mod_colour = Color( 0, 0.25098, 0, 0 )
+
+[node name="Level" type="Node2D"]
+
+[node name="Walls" type="TileMap" parent="."]
+material = SubResource( 1 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 65537, 1, 0, 65542, 2, 0, 65542, 3, 0, 65542, 4, 0, 65542, 5, 0, 65542, 6, 0, 65542, 7, 0, 65542, 8, 0, 65542, 9, 0, 65542, 10, 0, 65542, 11, 0, 65542, 12, 0, 65542, 13, 0, 65542, 14, 0, 65542, 15, 0, 65541, 65536, 0, 6, 65551, 0, 6, 131072, 0, 6, 131087, 0, 6, 196608, 0, 6, 196623, 0, 6, 262144, 0, 6, 262159, 0, 6, 327680, 0, 6, 327685, 0, 65537, 327686, 0, 65542, 327687, 0, 65542, 327688, 0, 65542, 327689, 0, 65542, 327690, 0, 65541, 327695, 0, 6, 393216, 0, 6, 393221, 0, 6, 393226, 0, 6, 393231, 0, 6, 458752, 0, 6, 458757, 0, 6, 458762, 0, 6, 458767, 0, 6, 524288, 0, 6, 524293, 0, 6, 524298, 0, 6, 524303, 0, 6, 589824, 0, 6, 589829, 0, 6, 589834, 0, 6, 589839, 0, 6, 655360, 0, 6, 655365, 0, 327681, 655366, 0, 65542, 655367, 0, 196614, 655370, 0, 393219, 655375, 0, 6, 720896, 0, 6, 720911, 0, 6, 786432, 0, 6, 786447, 0, 6, 851968, 0, 6, 851983, 0, 6, 917504, 0, 6, 917519, 0, 6, 983040, 0, 327681, 983041, 0, 65542, 983042, 0, 65542, 983043, 0, 65542, 983044, 0, 65542, 983045, 0, 65542, 983046, 0, 65542, 983047, 0, 65542, 983048, 0, 65542, 983049, 0, 65542, 983050, 0, 65542, 983051, 0, 65542, 983052, 0, 65542, 983053, 0, 65542, 983054, 0, 65542, 983055, 0, 327685 )
+
+[node name="Up" parent="." groups=[
+"Gravitator",
+] instance=ExtResource( 6 )]
+position = Vector2( 0, 0 )
+_gravity_direction = 180
+
+[node name="TileMap" parent="Up" index="0"]
+tile_data = PoolIntArray( 65549, 3, 131074, 65550, 3, 131076, 131085, 3, 262146, 131086, 3, 262148, 524296, 3, 131074, 524297, 3, 131076, 589832, 3, 262146, 589833, 3, 262148 )
+
+[node name="Down" parent="." groups=[
+"Gravitator",
+] instance=ExtResource( 6 )]
+material = SubResource( 3 )
+position = Vector2( 0, 0 )
+
+[node name="TileMap" parent="Down" index="0"]
+tile_data = PoolIntArray( 393222, 3, 131074, 393223, 3, 131076, 458758, 3, 262146, 458759, 3, 262148, 851969, 3, 131074, 851970, 3, 131076, 917505, 3, 262146, 917506, 3, 262148 )
+
+[node name="Left" parent="." groups=[
+"Gravitator",
+] instance=ExtResource( 6 )]
+material = SubResource( 4 )
+position = Vector2( 0, 0 )
+_gravity_direction = 90
+
+[node name="TileMap" parent="Left" index="0"]
+tile_data = PoolIntArray( 65537, 3, 131074, 65538, 3, 131076, 131073, 3, 262146, 131074, 3, 262148, 393224, 3, 131074, 393225, 3, 131076, 458760, 3, 262146, 458761, 3, 262148 )
+
+[node name="Right" parent="." groups=[
+"Gravitator",
+] instance=ExtResource( 6 )]
+material = SubResource( 2 )
+position = Vector2( 0, 0 )
+_gravity_direction = 270
+
+[node name="TileMap" parent="Right" index="0"]
+tile_data = PoolIntArray( 524294, 3, 131074, 524295, 3, 131076, 589830, 3, 262146, 589831, 3, 262148, 851981, 3, 131074, 851982, 3, 131076, 917517, 3, 262146, 917518, 3, 262148 )
+
+[node name="Rotator" parent="." groups=[
+"Rotator",
+] instance=ExtResource( 4 )]
+
+[node name="Player" parent="Rotator" instance=ExtResource( 5 )]
+position = Vector2( 64, 112 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+editor_draw_screen = false
+script = ExtResource( 1 )
+target = NodePath("../Rotator/Player")
+room_size = Vector2( 128, 128 )
+
+[editable path="Up"]
+
+[editable path="Down"]
+
+[editable path="Left"]
+
+[editable path="Right"]

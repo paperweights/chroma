@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/GravityArea.gd" type="Script" id=1]
+[ext_resource path="res://TileSet.tres" type="TileSet" id=2]
+[ext_resource path="res://Materials/Default.tres" type="Material" id=3]
+
+[node name="Gravitator" type="Area2D"]
+material = ExtResource( 3 )
+position = Vector2( 16, 112 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+use_parent_material = true
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+collision_use_parent = true
+format = 1
+tile_data = PoolIntArray( -1, 1, 0, -65536, 1, 0, 65535, 1, 0, 0, 1, 0 )
+[connection signal="body_entered" from="." to="." method="_on_collision_enter"]
