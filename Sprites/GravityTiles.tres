@@ -2,33 +2,22 @@
 
 [ext_resource path="res://Sprites/Gravity/Gravity6.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Gravity/Gravity5.png" type="Texture" id=2]
-
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/Gravity0.png-ad472b07f4848f9d5d2084d103096876.stex"
-
-[sub_resource type="StreamTexture" id=2]
-load_path = "res://.import/Gravity1.png-06871d436b0c73ba24fe9a41d60651b6.stex"
-
-[sub_resource type="StreamTexture" id=3]
-load_path = "res://.import/Gravity2.png-4784cf25157f3a4cdf523b5706c6ad17.stex"
-
-[sub_resource type="StreamTexture" id=4]
-load_path = "res://.import/Gravity3.png-6180d84d8d79fbe05a5d3bb02656f649.stex"
-
-[sub_resource type="StreamTexture" id=5]
-load_path = "res://.import/Gravity4.png-bd8d67bb66cc148a1a1095e3ff009337.stex"
+[ext_resource path="res://Sprites/Gravity/Gravity0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Gravity/Gravity1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Gravity/Gravity2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Gravity/Gravity3.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Gravity/Gravity4.png" type="Texture" id=7]
 
 [resource]
 frames = 7
-fps = 5.0
-frame_0/texture = SubResource( 1 )
-frame_1/texture = SubResource( 2 )
+frame_0/texture = ExtResource( 3 )
+frame_1/texture = ExtResource( 4 )
 frame_1/delay_sec = 0.0
-frame_2/texture = SubResource( 3 )
+frame_2/texture = ExtResource( 5 )
 frame_2/delay_sec = 0.0
-frame_3/texture = SubResource( 4 )
+frame_3/texture = ExtResource( 6 )
 frame_3/delay_sec = 0.0
-frame_4/texture = SubResource( 5 )
+frame_4/texture = ExtResource( 7 )
 frame_4/delay_sec = 0.0
 frame_5/texture = ExtResource( 2 )
 frame_5/delay_sec = 0.0
