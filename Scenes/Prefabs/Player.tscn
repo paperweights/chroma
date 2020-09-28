@@ -49,6 +49,7 @@ script = ExtResource( 2 )
 speed = 60.0
 jump_height = 2.0
 jumps = 1
+hold_gravity = 0.5
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource( 1 )
