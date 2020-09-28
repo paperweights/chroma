@@ -17,37 +17,37 @@
 shader = ExtResource( 11 )
 shader_param/mod_colour = Color( 0, 1, 0, 0 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=2]
 min_value = 0.25
 max_value = 0.75
 _data = [ Vector2( 0, 0.75 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.25 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "Run",
-"speed": 8.0
-}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "Jump",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Run",
+"speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 3, 3 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0, 1 )
 script = ExtResource( 2 )
 speed = 60.0
-jump_height = 3.0
+jump_height = 2.0
 jumps = 1
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
@@ -65,14 +65,14 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 10.0
 initial_velocity_random = 0.7
 scale_amount = 0.1
-scale_amount_curve = SubResource( 4 )
+scale_amount_curve = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 9 )
-frames = SubResource( 2 )
+frames = SubResource( 3 )
 animation = "Jump"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
