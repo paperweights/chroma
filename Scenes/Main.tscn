@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Levels/Level Main.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Levels/Ben/Tutorial.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Materials/PaletteSwap.tres" type="Material" id=7]
 
 [node name="ViewportContainer" type="ViewportContainer"]

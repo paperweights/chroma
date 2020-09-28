@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/CameraRoom.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Prefabs/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Prefabs/Gravitator.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Prefabs/Rotator.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/Shaders/Default.shader" type="Shader" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -70,20 +69,16 @@ _gravity_direction = 270
 [node name="TileMap" parent="Right" index="0"]
 tile_data = PoolIntArray( 720833, 3, 131074, 720834, 3, 131076, 786369, 3, 262146, 786370, 3, 262148 )
 
-[node name="Rotator" parent="." groups=[
-"Rotator",
-] instance=ExtResource( 5 )]
-
-[node name="Player" parent="Rotator" instance=ExtResource( 3 )]
-position = Vector2( 64, 112 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true
 editor_draw_screen = false
 script = ExtResource( 2 )
-target = NodePath("../Rotator/Player")
+target = NodePath("../Player")
 room_size = Vector2( 128, 128 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 64, 112 )
 
 [editable path="Up"]
 

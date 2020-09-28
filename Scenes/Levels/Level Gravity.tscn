@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/CameraRoom.gd" type="Script" id=1]
 [ext_resource path="res://TileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://Sprites/Shaders/Default.shader" type="Shader" id=3]
-[ext_resource path="res://Scenes/Prefabs/Rotator.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Prefabs/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Prefabs/Gravitator.tscn" type="PackedScene" id=6]
 
@@ -11,15 +10,15 @@
 shader = ExtResource( 3 )
 shader_param/mod_colour = Color( 0, 1, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/mod_colour = Color( 0, 0.501961, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 3 )
 shader_param/mod_colour = Color( 0, 0.752941, 0, 0 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
 shader_param/mod_colour = Color( 0, 0.25098, 0, 0 )
 
@@ -44,7 +43,7 @@ tile_data = PoolIntArray( 65549, 3, 131074, 65550, 3, 131076, 131085, 3, 262146,
 [node name="Down" parent="." groups=[
 "Gravitator",
 ] instance=ExtResource( 6 )]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 0, 0 )
 
 [node name="TileMap" parent="Down" index="0"]
@@ -53,7 +52,7 @@ tile_data = PoolIntArray( 393222, 3, 131074, 393223, 3, 131076, 458758, 3, 26214
 [node name="Left" parent="." groups=[
 "Gravitator",
 ] instance=ExtResource( 6 )]
-material = SubResource( 4 )
+material = SubResource( 3 )
 position = Vector2( 0, 0 )
 _gravity_direction = 90
 
@@ -63,27 +62,23 @@ tile_data = PoolIntArray( 65537, 3, 131074, 65538, 3, 131076, 131073, 3, 262146,
 [node name="Right" parent="." groups=[
 "Gravitator",
 ] instance=ExtResource( 6 )]
-material = SubResource( 2 )
+material = SubResource( 4 )
 position = Vector2( 0, 0 )
 _gravity_direction = 270
 
 [node name="TileMap" parent="Right" index="0"]
 tile_data = PoolIntArray( 524294, 3, 131074, 524295, 3, 131076, 589830, 3, 262146, 589831, 3, 262148, 851981, 3, 131074, 851982, 3, 131076, 917517, 3, 262146, 917518, 3, 262148 )
 
-[node name="Rotator" parent="." groups=[
-"Rotator",
-] instance=ExtResource( 4 )]
-
-[node name="Player" parent="Rotator" instance=ExtResource( 5 )]
-position = Vector2( 64, 112 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true
 editor_draw_screen = false
 script = ExtResource( 1 )
-target = NodePath("../Rotator/Player")
+target = NodePath("../Player")
 room_size = Vector2( 128, 128 )
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 64, 112 )
 
 [editable path="Up"]
 
