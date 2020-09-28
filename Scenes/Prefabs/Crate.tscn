@@ -1,17 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Sprites/Crate.png" type="Texture" id=1]
-
-[sub_resource type="GDScript" id=2]
+[ext_resource path="res://Scenes/Prefabs/Rotator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Crate.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Crate.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
 
-[node name="Crate" type="KinematicBody2D"]
-script = SubResource( 2 )
+[node name="Crate" type="KinematicBody2D" groups=[
+"Movable",
+]]
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Rotator" parent="." instance=ExtResource( 1 )]
+_target = NodePath("..")

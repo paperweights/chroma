@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/CameraRoom.gd" type="Script" id=1]
 [ext_resource path="res://TileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://Sprites/Shaders/Default.shader" type="Shader" id=3]
+[ext_resource path="res://Scenes/Prefabs/Crate.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Prefabs/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Prefabs/Gravitator.tscn" type="PackedScene" id=6]
 
@@ -79,6 +80,9 @@ room_size = Vector2( 128, 128 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 64, 112 )
+
+[node name="Crate" parent="." instance=ExtResource( 4 )]
+position = Vector2( 88, 72 )
 
 [editable path="Up"]
 

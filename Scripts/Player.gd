@@ -6,15 +6,13 @@ export (int) var jumps = 2
 export (float) var normal_gravity = 2
 export (float) var hold_gravity = 0.8
 
-var gravity_scale = 9.8
-
 var x_velocity = Vector2()
 var y_velocity = Vector2()
-
 var input = Vector2()
+var gravity_scale = 9.8
+var jump_count = jumps
 var jump_pressed = false
 var jump_held = false
-var jump_count = jumps
 var is_grounded = false
 
 func update_input():
