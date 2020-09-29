@@ -82,7 +82,7 @@ room_size = Vector2( 128, 128 )
 position = Vector2( 64, 112 )
 
 [node name="Moving Platform" parent="." instance=ExtResource( 4 )]
-pause = 1.0
+pause = 2.0
 
 [node name="0" type="Node2D" parent="Moving Platform/Waypoints" index="0"]
 position = Vector2( 96, 104 )
@@ -91,7 +91,7 @@ position = Vector2( 96, 104 )
 position = Vector2( 96, 16 )
 
 [node name="Platform" parent="Moving Platform" index="1"]
-speed = 32.0
+speed = 128.0
 
 [editable path="Up"]
 

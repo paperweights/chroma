@@ -19,6 +19,7 @@ func has_arrived():
 func _ready():
 	$Platform.position = waypoints[current_waypoint].position
 	$Platform.target = waypoints[current_waypoint].position
+	$Platform.set_sync_to_physics(true)
 	return
 
 func _process(delta):
