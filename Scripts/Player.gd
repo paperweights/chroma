@@ -17,6 +17,10 @@ var jump_held = false
 var jump_count = jumps
 var is_grounded = false
 
+func get_speed():
+	var velocity = x_velocity.abs() + y_velocity.abs()
+	return velocity.x + velocity.y
+
 func update_input():
 	input = Vector2()
 	# Jumping.
