@@ -4,7 +4,7 @@
 
 [node name="Camera2D" type="Camera2D"]
 current = true
-smoothing_speed = 0.0
+smoothing_enabled = true
 editor_draw_screen = false
 script = ExtResource( 1 )
 target = NodePath("../Player")

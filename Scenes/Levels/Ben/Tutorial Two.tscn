@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://TileSet.tres" type="TileSet" id=1]
-[ext_resource path="res://Scripts/CameraRoom.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Prefabs/FollowCamera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Prefabs/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Prefabs/Gravitator.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Prefabs/Rotator.tscn" type="PackedScene" id=5]
@@ -77,13 +77,7 @@ tile_data = PoolIntArray(  )
 [node name="Player" parent="Rotator" instance=ExtResource( 3 )]
 position = Vector2( 64, 112 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-smoothing_enabled = true
-editor_draw_screen = false
-script = ExtResource( 2 )
-target = NodePath("../Rotator/Player")
-room_size = Vector2( 128, 128 )
+[node name="Camera2D" parent="." instance=ExtResource( 2 )]
 
 [editable path="Up"]
 
