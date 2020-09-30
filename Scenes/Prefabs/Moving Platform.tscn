@@ -16,5 +16,8 @@ speed = 16.0
 [node name="TileMap" type="TileMap" parent="Platform"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
+collision_use_parent = true
+collision_layer = 0
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 65535, 0, 196608, 0, 0, 196614 )

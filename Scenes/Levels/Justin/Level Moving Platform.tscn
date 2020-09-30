@@ -88,7 +88,13 @@ pause = 2.0
 position = Vector2( 96, 104 )
 
 [node name="1" type="Node2D" parent="Moving Platform/Waypoints" index="1"]
-position = Vector2( 96, 16 )
+position = Vector2( 32, 104 )
+
+[node name="2" type="Node2D" parent="Moving Platform/Waypoints" index="2"]
+position = Vector2( 32, 32 )
+
+[node name="3" type="Node2D" parent="Moving Platform/Waypoints" index="3"]
+position = Vector2( 96, 32 )
 
 [node name="Platform" parent="Moving Platform" index="1"]
 speed = 128.0
