@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://TileSet.tres" type="TileSet" id=1]
+[ext_resource path="res://Scripts/Moving Platform.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Platform.gd" type="Script" id=3]
+
+[node name="Moving Platform" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Waypoints" type="Node2D" parent="."]
+
+[node name="Platform" type="KinematicBody2D" parent="."]
+script = ExtResource( 3 )
+speed = 16.0
+
+[node name="TileMap" type="TileMap" parent="Platform"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+collision_use_parent = true
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 65535, 0, 196608, 0, 0, 196614 )

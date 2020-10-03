@@ -1,117 +1,106 @@
 extends KinematicBody2D
 
-export (float) var speed = 2
-export (float) var jump_height = 10
-export (int) var jumps = 2
-export (float) var normal_gravity = 2
-export (float) var hold_gravity = 0.8
+export (float) var _speed = 60
+export (float) var _jump_height = 130
+export (int) var _jumps = 0
+export (float) var _normal_gravity = 2
+export (float) var _hold_gravity = 0.5
+export (float) var _coyote_time = 0.2
 
-var gravity_scale = 9.8
+onready var _sprite = $AnimatedSprite
+onready var _particles = $CPUParticles2D
 
-var x_velocity = Vector2()
-var y_velocity = Vector2()
+var _input = Vector2()
+var _x_velocity = Vector2()
+var _y_velocity = Vector2()
+var _snap = Vector2()
+var _gravity_scale = 9.8
+var _jump_held = false
+var _jump_pressed = false
+var _is_jumping = true
+var _time_since_left_ground = 0
+var _jump_count = _jumps
 
-var input = Vector2()
-var jump_pressed = false
-var jump_held = false
-var jump_count = jumps
-var is_grounded = false
+func _physics_process(delta: float):
+	_get_input()
+	# Horizontal movement.
+	_x_velocity = _move()
+	# Vertical movement.
+	_y_velocity += _gravity(_get_gravity_mod())
+	_jump()
+	# Calculating movement.
+	_update_snap()
+	_y_velocity = global_transform.y.abs() * move_and_slide_with_snap(_x_velocity + _y_velocity, _snap, -global_transform.y)
+	_update_coyote(delta)
+	_check_jumping()
+	# Draw.
+	_sprite.animate(_get_velocity())
+	_particles.emit(_get_velocity())
+	return
 
-func get_speed():
-	var velocity = x_velocity.abs() + y_velocity.abs()
-	return velocity.x + velocity.y
-
-func update_input():
-	input = Vector2()
+func _get_input():
+	_input = Vector2()
 	# Jumping.
-	jump_held = Input.is_action_pressed("player_jump")
-	jump_pressed = Input.is_action_just_pressed("player_jump")
+	_jump_held = Input.is_action_pressed("player_jump")
+	_jump_pressed = Input.is_action_just_pressed("player_jump")
 	# Walking.
-	if Input.is_action_pressed("player_up"):
-		input.y -= 1
-	if Input.is_action_pressed("player_down"):
-		input.y += 1
-	if Input.is_action_pressed("player_left"):
-		input.x -= 1
-	if Input.is_action_pressed("player_right"):
-		input.x += 1
+	_input.y = Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
+	_input.x = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
 	return
 
-func move(delta: float):
-	var total_speed = speed * delta * input
-	return total_speed * global_transform.x.abs()
+func _move():
+	return _input * _speed * global_transform.x.abs()
 
-func jump():
-	if !jump_pressed || jump_count >= jumps:
-		return
-	jump_count += 1
-	y_velocity = -jump_height * global_transform.y
-	return
+func _gravity(gravity_mod: float):
+	return _gravity_scale * gravity_mod * global_transform.y
 
-func grounded(normal: Vector2):
-	return normal.round() == -global_transform.y.round()
-
-func y_collide(collision: KinematicCollision2D):
-	if collision == null:
-		return
-	# Reset jumps.
-	y_velocity = Vector2()
-	if grounded(collision.normal):
-		is_grounded = true
-		jump_count = 0
-		return
-	return
-
-func x_collide(collision: KinematicCollision2D):
-	if collision == null:
-		return
-	x_velocity = Vector2()
-	return
-
-func flip_sprite():
-	var x_vel = x_velocity * global_transform.x
-	if abs(x_vel.x + x_vel.y) < 0.1:
-		return
-	$AnimatedSprite.flip_h = x_vel.x + x_vel.y < 0
-	return
-
-func animate_sprite():
-	var x_vel = x_velocity * global_transform.x
-	# Jumping.
-	if !is_grounded:
-		$AnimatedSprite.animation = "Jump"
-		$CPUParticles2D.emitting = false
-		return
-	# Idle.
-	if abs(x_vel.x + x_vel.y) < 0.1:
-		$AnimatedSprite.animation = "Idle"
-		$CPUParticles2D.emitting = false
-		return
-	# Running.
-	$AnimatedSprite.animation = "Run"
-	$CPUParticles2D.emitting = true
-	return
-
-func get_gravity_mod():
-	var y_vel = y_velocity * global_transform.y
-	if y_vel.x + y_vel.y < 0:
-		if jump_held:
-			return hold_gravity
-		return normal_gravity
+func _get_gravity_mod():
+	if _get_velocity().y < 0:
+		if _jump_held:
+			return _hold_gravity
+		return _normal_gravity
 	return 1
 
-func gravity(delta: float, gravity_mod: float):
-	return gravity_scale * gravity_mod * delta * global_transform.y
-
-func _physics_process(delta):
-	is_grounded = false
-	update_input()
-	x_velocity = move(delta)
-	x_collide(move_and_collide(x_velocity))
-	y_velocity += gravity(delta, get_gravity_mod())
-	jump()
-	y_collide(move_and_collide(y_velocity))
-	# Draw.
-	flip_sprite()
-	animate_sprite()
+func _jump():
+	# Wait for jump key press.
+	if !_jump_pressed:
+		return
+	# Have to be grounded or have extra jumps.
+	if !_is_grounded() && _jump_count >= _jumps:
+		return
+	if !_is_grounded():
+		_jump_count += 1
+	_is_jumping = true
+	_y_velocity = -_jump_height * global_transform.y
 	return
+
+func _update_snap():
+	_snap = global_transform.y * 6 if !_is_jumping else Vector2()
+	return
+
+func _update_coyote(delta: float):
+	if _is_jumping:
+		_time_since_left_ground = _coyote_time
+	if is_on_floor():
+		_y_velocity = Vector2()
+		_time_since_left_ground = 0
+		_jump_count = 0
+		return
+	_time_since_left_ground += delta
+	return
+
+func _check_jumping():
+	if _is_jumping &&  _get_velocity().y > 0:
+		_is_jumping = false
+	return
+
+func _get_velocity() -> Vector2:
+	var x_vel = _x_velocity * global_transform.x
+	var y_vel = _y_velocity * global_transform.y
+	var velocity = Vector2()
+	velocity.x = x_vel.x + x_vel.y
+	velocity.y = y_vel.x + y_vel.y
+	return velocity
+
+func _is_grounded() -> bool:
+	return !_is_jumping && (is_on_floor() || _time_since_left_ground < _coyote_time)
