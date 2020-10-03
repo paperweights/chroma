@@ -1,9 +1,10 @@
 extends Camera2D
 
+export (float) var speed_threshold = 5
 export (NodePath) var target = ""
 export (Vector2) var room_size = Vector2()
 
-var target_node = null
+onready var target_node = get_node(target)
 
 func get_target_pos():
 	var t_pos = target_node.position
@@ -14,10 +15,10 @@ func get_target_pos():
 	return room_center
 
 func _ready():
-	target_node = get_node(target)
 	position = get_target_pos()
 	return
 
 func _process(delta):
 	position = get_target_pos()
+	smoothing_enabled = target_node.get_speed() < speed_threshold
 	return
