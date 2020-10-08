@@ -1,24 +1,22 @@
 extends Camera2D
 
-export (float) var speed_threshold = 5
-export (NodePath) var target = ""
-export (Vector2) var room_size = Vector2()
+export (NodePath) var _target = ""
+export (Vector2) var _room_size = Vector2()
 
-onready var target_node = get_node(target)
+onready var _target_node = get_node(_target)
 
-func get_target_pos():
-	var t_pos = target_node.position
+func get_target_pos() -> Vector2:
+	var t_pos = _target_node.position
 	var room_pos = Vector2()
-	room_pos.x = floor(t_pos.x / room_size.x)
-	room_pos.y = floor(t_pos.y / room_size.y)
-	var room_center = room_pos * room_size + 0.5 * room_size
+	room_pos.x = floor(t_pos.x / _room_size.x)
+	room_pos.y = floor(t_pos.y / _room_size.y)
+	var room_center = room_pos * _room_size + 0.5 * _room_size
 	return room_center
 
 func _ready():
 	position = get_target_pos()
 	return
 
-func _process(delta):
+func _process(delta: float):
 	position = get_target_pos()
-	smoothing_enabled = target_node.get_speed() < speed_threshold
 	return

@@ -6,6 +6,7 @@ export (int) var _jumps = 0
 export (float) var _normal_gravity = 2
 export (float) var _hold_gravity = 0.5
 export (float) var _coyote_time = 0.2
+export (float) var terminal_velocity = 300
 
 onready var _sprite = $AnimatedSprite
 onready var _particles = $CPUParticles2D
@@ -31,11 +32,12 @@ func _physics_process(delta: float):
 	# Calculating movement.
 	_update_snap()
 	_y_velocity = global_transform.y.abs() * move_and_slide_with_snap(_x_velocity + _y_velocity, _snap, -global_transform.y)
+	_terminal_velocity()
 	_update_coyote(delta)
 	_check_jumping()
 	# Draw.
-	_sprite.animate(_get_velocity())
-	_particles.emit(_get_velocity())
+	_sprite.animate(get_velocity())
+	_particles.emit(get_velocity())
 	return
 
 func _get_input():
@@ -55,7 +57,7 @@ func _gravity(gravity_mod: float):
 	return _gravity_scale * gravity_mod * global_transform.y
 
 func _get_gravity_mod():
-	if _get_velocity().y < 0:
+	if get_velocity().y < 0:
 		if _jump_held:
 			return _hold_gravity
 		return _normal_gravity
@@ -78,6 +80,11 @@ func _update_snap():
 	_snap = global_transform.y * 6 if !_is_jumping else Vector2()
 	return
 
+func _terminal_velocity():
+	var velocity = clamp(get_velocity().y, -terminal_velocity, terminal_velocity)
+	_y_velocity = global_transform.y * velocity
+	return
+
 func _update_coyote(delta: float):
 	if _is_jumping:
 		_time_since_left_ground = _coyote_time
@@ -90,17 +97,17 @@ func _update_coyote(delta: float):
 	return
 
 func _check_jumping():
-	if _is_jumping &&  _get_velocity().y > 0:
+	if _is_jumping &&  get_velocity().y > 0:
 		_is_jumping = false
 	return
 
-func _get_velocity() -> Vector2:
+func _is_grounded() -> bool:
+	return !_is_jumping && (is_on_floor() || _time_since_left_ground < _coyote_time)
+
+func get_velocity() -> Vector2:
 	var x_vel = _x_velocity * global_transform.x
 	var y_vel = _y_velocity * global_transform.y
 	var velocity = Vector2()
 	velocity.x = x_vel.x + x_vel.y
 	velocity.y = y_vel.x + y_vel.y
 	return velocity
-
-func _is_grounded() -> bool:
-	return !_is_jumping && (is_on_floor() || _time_since_left_ground < _coyote_time)
