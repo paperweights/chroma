@@ -7,5 +7,4 @@ current = true
 smoothing_enabled = true
 editor_draw_screen = false
 script = ExtResource( 1 )
-target = NodePath("../Player")
-room_size = Vector2( 128, 128 )
+_room_size = Vector2( 128, 128 )

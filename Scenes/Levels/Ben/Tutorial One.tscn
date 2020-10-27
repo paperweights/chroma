@@ -73,6 +73,7 @@ tile_data = PoolIntArray( 720833, 3, 131074, 720834, 3, 131076, 786369, 3, 26214
 position = Vector2( 64, 112 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
+_target = NodePath("../Player")
 
 [editable path="Up"]
 
