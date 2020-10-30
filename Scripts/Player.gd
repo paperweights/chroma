@@ -15,7 +15,7 @@ var _input = Vector2()
 var _x_velocity = Vector2()
 var _y_velocity = Vector2()
 var _snap = Vector2()
-var _gravity_scale = 9.8
+var _gravity_scale = 588
 var _jump_held = false
 var _jump_pressed = false
 var _is_jumping = true
@@ -27,7 +27,7 @@ func _physics_process(delta: float):
 	# Horizontal movement.
 	_x_velocity = _move()
 	# Vertical movement.
-	_y_velocity += _gravity(_get_gravity_mod())
+	_y_velocity += _gravity(_get_gravity_mod(), delta)
 	_jump()
 	# Calculating movement.
 	_update_snap()
@@ -53,8 +53,8 @@ func _get_input():
 func _move():
 	return _input * _speed * global_transform.x.abs()
 
-func _gravity(gravity_mod: float):
-	return _gravity_scale * gravity_mod * global_transform.y
+func _gravity(gravity_mod: float, delta: float):
+	return _gravity_scale * gravity_mod * global_transform.y * delta
 
 func _get_gravity_mod():
 	if get_velocity().y < 0:
