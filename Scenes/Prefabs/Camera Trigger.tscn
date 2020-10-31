@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Camera Trigger.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 64, 64 )
+
+[node name="Camera Trigger" type="Area2D"]
+monitorable = false
+script = ExtResource( 1 )
+_player_node = NodePath("../../Player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 64, 64 )
+shape = SubResource( 5 )
+[connection signal="body_entered" from="." to="." method="_on_Camera_Trigger_body_entered"]

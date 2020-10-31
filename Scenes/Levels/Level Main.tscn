@@ -74,8 +74,6 @@ current = true
 smoothing_enabled = true
 editor_draw_screen = false
 script = ExtResource( 1 )
-target = NodePath("../Player")
-room_size = Vector2( 128, 128 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 64, 112 )

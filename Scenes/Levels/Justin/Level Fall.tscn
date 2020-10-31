@@ -70,9 +70,6 @@ _gravity_direction = 270
 tile_data = PoolIntArray(  )
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-smoothing_enabled = true
-smoothing_speed = 5.0
-speed_threshold = 5.0
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 64, 112 )

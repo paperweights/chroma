@@ -4,7 +4,9 @@
 [ext_resource path="res://TileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://Materials/Default.tres" type="Material" id=3]
 
-[node name="Gravitator" type="Area2D"]
+[node name="Gravitator" type="Area2D" groups=[
+"Gravitator",
+]]
 material = ExtResource( 3 )
 position = Vector2( 16, 112 )
 script = ExtResource( 1 )

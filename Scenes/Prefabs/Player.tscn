@@ -27,6 +27,11 @@ _data = [ Vector2( 0, 0.75 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.25 ), 0.0, 0.0, 0, 0
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "Jump",
@@ -36,11 +41,6 @@ animations = [ {
 "loop": true,
 "name": "Run",
 "speed": 8.0
-}, {
-"frames": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
