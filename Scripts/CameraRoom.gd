@@ -8,10 +8,6 @@ export (Vector2) var _max_room = Vector2()
 
 onready var _target = get_node(_target_node)
 
-func _ready():
-	position = get_target_pos()
-	return
-
 func _process(delta: float):
 	position = get_target_pos()
 	return

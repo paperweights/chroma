@@ -66,6 +66,7 @@ _gravity_direction = 270
 tile_data = PoolIntArray(  )
 
 [node name="Camera 2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 64, 64 )
 _target_node = NodePath("../Player")
 _max_room = Vector2( 2, 0 )
 
@@ -85,6 +86,14 @@ _max_room = Vector2( 2, 0 )
 position = Vector2( 128, 64 )
 shape = SubResource( 5 )
 
+[node name="Camera Trigger3" parent="Camera Triggers" instance=ExtResource( 4 )]
+position = Vector2( 256, 128 )
+_min_room = Vector2( 2, 1 )
+_max_room = Vector2( 2, 1 )
+
+[node name="CollisionShape2D" parent="Camera Triggers/Camera Trigger3" index="0"]
+position = Vector2( 65, 64 )
+
 [editable path="Up"]
 
 [editable path="Down"]
@@ -94,3 +103,5 @@ shape = SubResource( 5 )
 [editable path="Right"]
 
 [editable path="Camera Triggers/Camera Trigger2"]
+
+[editable path="Camera Triggers/Camera Trigger3"]
